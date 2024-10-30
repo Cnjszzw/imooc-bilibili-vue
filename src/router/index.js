@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HelloWorld   from "@/components/HelloWorld.vue";
+//import HelloWorld   from "@/components/HelloWorld.vue";
 import UserLogin from "@/components/UserLogin.vue";
+import mainPage from "@/components/MainPage.vue";
 // import MainPage from "@/components/MainPage.vue";
 // import MySpaceHome from "@/components/mySpace/MySpaceHome.vue";
 // import MySpacePost from "@/components/mySpace/MySpacePost.vue";
@@ -21,7 +22,7 @@ const routes = [
     {
         // 首页
         path:'/',
-        component:HelloWorld,
+        component:mainPage,
     },
     {
         // 注册登录页
