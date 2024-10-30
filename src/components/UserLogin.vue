@@ -3,7 +3,7 @@
     <div class="user-login-form-container">
       <div class="user-login-form">
         <div class="user-login-form-title">
-          密码登录-Home
+          密码登录
         </div>
         <div class="user-login-form-item">
           <div class="user-login-form-item-title">
@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'UserLogin',
   props: {
     msg: String
   },
