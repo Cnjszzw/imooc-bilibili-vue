@@ -21,10 +21,10 @@
           </div>
         </div>
         <div class="user-login-form-footer">
-          <button v-on:click="register(account, password)" class="user-login-form-footer-btn">
+          <button  class="user-login-form-footer-btn">
             注册
           </button>
-          <button @click="login" class="user-login-form-footer-btn">
+          <button  class="user-login-form-footer-btn">
             登录
           </button>
         </div>
@@ -38,12 +38,18 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  }
+  },
+  data(){
+    return {
+      account:'',
+      password:''
+    }
+  },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="less">
 .user-login-form-container {
   margin-top: 10%;
   margin-left: 20%;
