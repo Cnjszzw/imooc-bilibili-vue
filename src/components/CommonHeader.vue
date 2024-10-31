@@ -1,125 +1,123 @@
 <script>
 import userUtils from "@/utils/userUtils";
 import LoginDialog from "@/components/LoginDialog.vue";
-//import LoginDialog from "@/components/LoginDialog.vue";
-// import userMomentApi from "@/api/userMomentApi";
-// import userHistoryApi from "@/api/userHistoryApi";
+//import userMomentApi from "@/api/userMomentApi";
+//import userHistoryApi from "@/api/userHistoryApi";
 
 export default {
   name: "CommonHeader",
   components: {LoginDialog},
-  // components: {LoginDialog},
-  data() {
+  data(){
     return {
-      dialogVisible: false,
-      entries: [
+      dialogVisible:false,
+      entries:[
         {
-          id: 1,
-          name: '首页',
-          path: '/'
+          id:1,
+          name:'首页',
+          path:'/'
         },
         {
-          id: 2,
-          name: '番剧',
-          path: '/'
+          id:2,
+          name:'番剧',
+          path:'/'
         },
         {
-          id: 3,
-          name: '直播',
-          path: '/'
+          id:3,
+          name:'直播',
+          path:'/'
         },
         {
-          id: 4,
-          name: '游戏中心',
-          path: '/'
+          id:4,
+          name:'游戏中心',
+          path:'/'
         }
       ],
-      searchTxt: '',
-      // moments:[],
-      // histories:[]
+      searchTxt:'',
+      moments:[],
+      histories:[]
     }
   },
-  mixins: [userUtils],
-  methods: {
-    jumpWithLoginUser(path) {
+  mixins:[userUtils],
+  methods:{
+    jumpWithLoginUser(path){
       //先判断用户是否登录，如果没有登录，弹出用户登录对话框
-      if (!this.isUserLoggedIn) {
+      if(!this.isUserLoggedIn){
         this.dialogVisible = true;
-      } else {
+      }else{
         //打开一个新的页面地址
         //如果当前页面的路径等于我们要跳转的路径，则只需要刷新页面
-        if (this.$route.path !== path) {
+        if(this.$route.path !== path){
           this.$router.push(path);
-        } else {
+        }else{
           location.reload();
         }
       }
     },
 
-    jumpToPath(path) {
-      if (this.$route.path !== path) {
+    jumpToPath(path){
+      if(this.$route.path !== path){
         this.$router.push(path);
-      } else {
+      }else{
         location.reload();
       }
     },
-    //
-    searchContents() {
-      //     if(this.searchTxt === ''){
-      //       window.alert('请输入搜索内容');
-      //       return;
-      //     }
-      //     //判断是否重复跳转
-      //     if(decodeURIComponent(this.$route.fullPath)
-      //         === '/searchContents?searchTxt='+this.searchTxt){
-      //       location.reload();
-      //       return;
-      //     }
-      //     this.$router.push({
-      //       path:'/searchContents',
-      //       query:{
-      //         searchTxt:this.searchTxt
-      //       }
-      //     })
-      //   }
-      //
-    },
-    //
-    // async mounted() {
-    //   if(this.isUserLoggedIn){
-    //     this.$store.state.userInfo = await this.getUserBasicInfo();
-    //
-    //     let params = {
-    //       size:5,
-    //       no:1
-    //     }
-    //     //查询动态
-    //     let response = await userMomentApi.pageListMoments(params);
-    //     if(response.data){
-    //       this.moments = response.data.list;
-    //     }
-    //     //查询历史
-    //     let response1 = await userHistoryApi.pagListUserVideoHistory(params);
-    //     if(response1.data){
-    //       this.histories = response1.data.list;
-    //     }
-    //   }
+
+    searchContents(){
+      if(this.searchTxt === ''){
+        window.alert('请输入搜索内容');
+        return;
+      }
+      //判断是否重复跳转
+      if(decodeURIComponent(this.$route.fullPath)
+          === '/searchContents?searchTxt='+this.searchTxt){
+        location.reload();
+        return;
+      }
+      this.$router.push({
+        path:'/searchContents',
+        query:{
+          searchTxt:this.searchTxt
+        }
+      })
+    }
 
   },
 
-  computed: {
-
-    isUserLoggedIn() {
-      return localStorage.getItem('token');
+  async mounted() {
+    if(this.isUserLoggedIn){
+      this.$store.state.userInfo = await this.getUserBasicInfo();
+      //
+      // let params = {
+      //   size:5,
+      //   no:1
+      // }
+      // //查询动态
+      // let response = await userMomentApi.pageListMoments(params);
+      // if(response.data){
+      //   this.moments = response.data.list;
+      // }
+      // //查询历史
+      // let response1 = await userHistoryApi.pagListUserVideoHistory(params);
+      // if(response1.data){
+      //   this.histories = response1.data.list;
+      // }
     }
-    // avatar(){
-    //   const userInfo = this.$store.state.userInfo;
-    //   if(userInfo && userInfo.avatar && userInfo.avatar !== '' ){
-    //     return userInfo.avatar;
-    //   }else{
-    //     return require('@/assets/bilibiliavatar.png');
-    //   }
+
+  },
+
+  computed:{
+
+    // isUserLoggedIn(){
+    //   return localStorage.getItem('token');
     // }
+    avatar(){
+      const userInfo = this.$store.state.userInfo;
+      if(userInfo && userInfo.avatar && userInfo.avatar !== '' ){
+        return userInfo.avatar;
+      }else{
+        return require('@/assets/icon/bilibiliavatar.png');
+      }
+    }
 
   },
 }
@@ -156,7 +154,7 @@ export default {
           <el-dropdown>
                       <span class="el-dropdown-link">
                         <img style="height: 50px; width: 50px; border-radius: 50%"
-                             :src="require('@/assets/icon/bilibiliavatar.png')" alt="">
+                             :src="avatar" alt="">
                       </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>

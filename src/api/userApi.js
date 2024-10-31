@@ -30,14 +30,14 @@ export default {
         return await httpRequest.post('user-dts', params);
     },
 
-    // /**
-    //  * 获取用户基本信息
-    //  */
-    // async getUserBasicInfo(){
-    //     return await httpRequest.get('/users');
-    // },
-    //
-    //
+    /**
+     * 获取用户基本信息
+     */
+    async getUserBasicInfo(){
+        return await httpRequest.get('/users');
+    },
+
+
     /**
      * 更新用户
      */
