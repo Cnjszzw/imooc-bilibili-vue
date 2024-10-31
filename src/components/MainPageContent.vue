@@ -2,6 +2,8 @@
 // import videoApi from "@/api/videoApi";
 // import userUtils from "@/utils/userUtils";
 
+import videoApi from "@/api/videoApi";
+
 export default {
   name: "MainPageContent",
   // mixins:[userUtils],
@@ -190,8 +192,8 @@ export default {
           viewCount:40
         }
       ],
-      // infiniteId:1,
-      // currentPage:1
+      infiniteId:1,
+      currentPage:1
     }
 
   },
@@ -209,29 +211,29 @@ export default {
       //   this.$router.push('/videoDetail');
       // }
     },
-    //
-    // pageListVideos($state){
-    //   let params = {
-    //     size:10,
-    //     no:this.currentPage
-    //   }
-    //   videoApi.pageListVideos({params}).then(response => {
-    //     const {list:videos, total:total} = response.data;
-    //     if(videos.length === 0){
-    //       // 已加载所有数据，不再触发加载
-    //       $state.complete();
-    //       return;
-    //     }
-    //     this.videos = this.videos.concat(videos);
-    //     this.total = total;
-    //     this.currentPage++; // 递增当前页码
-    //     $state.loaded(); // 标记加载完成
-    //   }).catch(error => {
-    //     // 捕获异常
-    //     console.error('请求出错:', error);
-    //     $state.complete();
-    //   });
-    // },
+
+    pageListVideos($state){
+      let params = {
+        size:10,
+        no:this.currentPage
+      }
+      videoApi.pageListVideos({params}).then(response => {
+        const {list:videos, total:total} = response.data;
+        if(videos.length === 0){
+          // 已加载所有数据，不再触发加载
+          $state.complete();
+          return;
+        }
+        this.videos = this.videos.concat(videos);
+        this.total = total;
+        this.currentPage++; // 递增当前页码
+        $state.loaded(); // 标记加载完成
+      }).catch(error => {
+        // 捕获异常
+        console.error('请求出错:', error);
+        $state.complete();
+      });
+    },
     //
     // async getVideoRecommendations(){
     //   if(this.isUserLoggedIn){
@@ -331,9 +333,9 @@ export default {
         </div>
 
       </div>
-<!--      <infinite-loading :infinite-id="infiniteId"-->
-<!--                        @infinite="pageListVideos">-->
-<!--      </infinite-loading>-->
+      <infinite-loading :infinite-id="infiniteId"
+                        @infinite="pageListVideos">
+      </infinite-loading>
 
     </div>
 
