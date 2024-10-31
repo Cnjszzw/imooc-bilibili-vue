@@ -21,12 +21,20 @@
           </div>
         </div>
         <div class="user-login-form-footer">
-          <button v-on:click="register(account, password)" class="user-login-form-footer-btn">
+<!--          <button v-on:click="register(account, password)" class="user-login-form-footer-btn">-->
+<!--            注册-->
+<!--          </button>-->
+<!--          <button @click="login" class="user-login-form-footer-btn">-->
+<!--            登录-->
+<!--          </button>-->
+          <el-button type="primary" class="user-login-form-footer-btn"
+                     @click="register">
             注册
-          </button>
-          <button @click="login" class="user-login-form-footer-btn">
+          </el-button>
+          <el-button type="primary" class="user-login-form-footer-btn"
+                     @click="login">
             登录
-          </button>
+          </el-button>
         </div>
       </div>
     </div>
@@ -164,6 +172,9 @@ export default {
     .user-login-form-footer {
       display: flex;
       justify-content: space-between;
+      .user-login-form-footer-btn{
+        width: 100%;
+      }
     }
   }
 }
