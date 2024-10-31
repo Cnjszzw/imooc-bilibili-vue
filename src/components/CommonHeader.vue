@@ -10,29 +10,29 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      // entries:[
-      //   {
-      //    id:1,
-      //    name:'首页',
-      //    path:'/'
-      //   },
-      //   {
-      //     id:2,
-      //     name:'番剧',
-      //     path:'/'
-      //   },
-      //   {
-      //     id:3,
-      //     name:'直播',
-      //     path:'/'
-      //   },
-      //   {
-      //     id:4,
-      //     name:'游戏中心',
-      //     path:'/'
-      //   }
-      // ],
-      // searchTxt:'',
+      entries: [
+        {
+          id: 1,
+          name: '首页',
+          path: '/'
+        },
+        {
+          id: 2,
+          name: '番剧',
+          path: '/'
+        },
+        {
+          id: 3,
+          name: '直播',
+          path: '/'
+        },
+        {
+          id: 4,
+          name: '游戏中心',
+          path: '/'
+        }
+      ],
+      searchTxt: '',
       // moments:[],
       // histories:[]
     }
@@ -54,34 +54,34 @@ export default {
       }
     },
 
-    //   jumpToPath(path){
-    //     if(this.$route.path !== path){
-    //       this.$router.push(path);
-    //     }else{
-    //       location.reload();
-    //     }
-    //   },
+    jumpToPath(path) {
+      if (this.$route.path !== path) {
+        this.$router.push(path);
+      } else {
+        location.reload();
+      }
+    },
     //
-    //   searchContents(){
-    //     if(this.searchTxt === ''){
-    //       window.alert('请输入搜索内容');
-    //       return;
-    //     }
-    //     //判断是否重复跳转
-    //     if(decodeURIComponent(this.$route.fullPath)
-    //         === '/searchContents?searchTxt='+this.searchTxt){
-    //       location.reload();
-    //       return;
-    //     }
-    //     this.$router.push({
-    //       path:'/searchContents',
-    //       query:{
-    //         searchTxt:this.searchTxt
-    //       }
-    //     })
-    //   }
-    //
-    // },
+    searchContents() {
+      //     if(this.searchTxt === ''){
+      //       window.alert('请输入搜索内容');
+      //       return;
+      //     }
+      //     //判断是否重复跳转
+      //     if(decodeURIComponent(this.$route.fullPath)
+      //         === '/searchContents?searchTxt='+this.searchTxt){
+      //       location.reload();
+      //       return;
+      //     }
+      //     this.$router.push({
+      //       path:'/searchContents',
+      //       query:{
+      //         searchTxt:this.searchTxt
+      //       }
+      //     })
+      //   }
+      //
+    },
     //
     // async mounted() {
     //   if(this.isUserLoggedIn){
@@ -129,28 +129,25 @@ export default {
 
     <div class="header-nav-container">
 
-      <!--      <div class="left-entry">-->
-      <!--        <div v-for="entry in entries" :key="entry.id">-->
-      <!--          <span @click="jumpToPath(entry.path)">{{entry.name}}</span>-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-      <!--      <div class="center-search-bar">-->
-      <!--        <form class="nav-search-form">-->
-      <!--          <div class="nav-search-content">-->
-      <!--            <input class="nav-search-input"-->
-      <!--                    type="text" autocomplete="off"-->
-      <!--                    maxlength="100" placeholder="请输入要搜索的内容"-->
-      <!--                    v-model="searchTxt">-->
-      <!--          </div>-->
-      <!--          <div class="nav-search-btn">-->
-      <!--            <el-button icon="el-icon-search"-->
-      <!--                       circle size="mini" @click="searchContents"></el-button>-->
-      <!--          </div>-->
-      <!--        </form>-->
-
-      <!--      </div>-->
-
+      <div class="left-entry">
+        <div v-for="entry in entries" :key="entry.id">
+          <span @click="jumpToPath(entry.path)">{{ entry.name }}</span>
+        </div>
+      </div>
+            <div class="center-search-bar">
+              <form class="nav-search-form">
+                <div class="nav-search-content">
+                  <input class="nav-search-input"
+                          type="text" autocomplete="off"
+                          maxlength="100" placeholder="请输入要搜索的内容"
+                          v-model="searchTxt">
+                </div>
+                <div class="nav-search-btn">
+                  <el-button icon="el-icon-search"
+                             circle size="mini" @click="searchContents"></el-button>
+                </div>
+              </form>
+            </div>
       <div class="right-entry">
 
         <div v-if="isUserLoggedIn" class="user-center">
@@ -215,7 +212,7 @@ export default {
               placement="top-start"
               width="200"
               trigger="hover">
-            <el-button slot="reference" class = "el-btn-moments">hover 激活</el-button>
+            <el-button slot="reference" class="el-btn-moments">hover 激活</el-button>
           </el-popover>
           <!--          <el-popover-->
           <!--              placement="top-start"-->
@@ -371,6 +368,68 @@ export default {
     position: absolute;
     width: 100%;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .left-entry{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-left: 40px;
+      span{
+        margin-right: 20px;
+        color: white;
+        font-weight: bolder;
+        cursor: pointer;
+      }
+    }
+
+    .center-search-bar{
+      flex: 1 auto;
+      min-width: 181px;
+      max-width: 500px;
+      .nav-search-form{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 4px 0 4px;
+        height: 40px;
+        background-color: white;
+        border-radius: 8px;
+        opacity: 0.8;
+        .nav-search-content{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          height: 36px;
+          border: 2px solid transparent;
+          border-radius: 6px;
+          .nav-search-input{
+            width: 100%;
+            font-size: 14px;
+            padding-right: 8px;
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            outline: none;
+          }
+        }
+
+        .nav-search-btn{
+          margin: 0;
+          padding: 0;
+          width: 32px;
+          height: 32px;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+        }
+
+
+      }
+
+    }
 
     .right-entry {
       display: flex;
@@ -380,7 +439,8 @@ export default {
 
       .user-center {
         margin-right: 10px;
-        .login-button{
+
+        .login-button {
           color: #00a1d6;
           width: 50px;
           height: 50px;
@@ -392,7 +452,8 @@ export default {
 
       .right-entry-moments {
         margin-right: 10px;
-        .el-btn-moments{
+
+        .el-btn-moments {
           border-radius: 10px;
           height: 100%;
         }
@@ -403,17 +464,20 @@ export default {
         display: flex;
         flex-direction: row;
         align-items: center;
-        span{
+
+        span {
           color: white;
           margin-top: 5px;
         }
-        .history{
+
+        .history {
           margin-right: 10px;
           display: flex;
           flex-direction: column;
           align-items: center;
         }
-        .post{
+
+        .post {
           margin-right: 10px;
           display: flex;
           flex-direction: column;

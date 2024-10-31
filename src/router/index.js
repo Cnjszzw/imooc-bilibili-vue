@@ -24,8 +24,18 @@ const routes = [
     {
         // 首页
         path:'/',
+        component:mainPage
+    },
+    {
+        // 注册登录页
+        path:'/userLogin',
+        component:UserLogin
+    },
+    {
+        // 个人中心
+        path:'/myspace',
         component:mainPage,
-        redirect:'home',
+        redirect:'/myspace/home',
         children:[
             {
                 // 个人中心-首页
@@ -38,11 +48,6 @@ const routes = [
                 component: MySpacePost
             }
         ]
-    },
-    {
-        // 注册登录页
-        path:'/userLogin',
-        component:UserLogin
     },
 
 ]
