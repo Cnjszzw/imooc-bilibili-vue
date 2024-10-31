@@ -1,11 +1,13 @@
 <script>
-// import userUtils from "@/utils/userUtils";
-// import LoginDialog from "@/components/LoginDialog.vue";
+import userUtils from "@/utils/userUtils";
+import LoginDialog from "@/components/LoginDialog.vue";
+//import LoginDialog from "@/components/LoginDialog.vue";
 // import userMomentApi from "@/api/userMomentApi";
 // import userHistoryApi from "@/api/userHistoryApi";
 
 export default {
   name: "CommonHeader",
+  components: {LoginDialog},
   // components: {LoginDialog},
   data() {
     return {
@@ -37,7 +39,7 @@ export default {
       // histories:[]
     }
   },
-  // mixins:[userUtils],
+  mixins: [userUtils],
   methods: {
     jumpWithLoginUser(path) {
       //先判断用户是否登录，如果没有登录，弹出用户登录对话框
@@ -134,55 +136,55 @@ export default {
           <span @click="jumpToPath(entry.path)">{{ entry.name }}</span>
         </div>
       </div>
-            <div class="center-search-bar">
-              <form class="nav-search-form">
-                <div class="nav-search-content">
-                  <input class="nav-search-input"
-                          type="text" autocomplete="off"
-                          maxlength="100" placeholder="请输入要搜索的内容"
-                          v-model="searchTxt">
-                </div>
-                <div class="nav-search-btn">
-                  <el-button icon="el-icon-search"
-                             circle size="mini" @click="searchContents"></el-button>
-                </div>
-              </form>
-            </div>
+      <div class="center-search-bar">
+        <form class="nav-search-form">
+          <div class="nav-search-content">
+            <input class="nav-search-input"
+                   type="text" autocomplete="off"
+                   maxlength="100" placeholder="请输入要搜索的内容"
+                   v-model="searchTxt">
+          </div>
+          <div class="nav-search-btn">
+            <el-button icon="el-icon-search"
+                       circle size="mini" @click="searchContents"></el-button>
+          </div>
+        </form>
+      </div>
       <div class="right-entry">
 
         <div v-if="isUserLoggedIn" class="user-center">
-          <!--          <el-dropdown>-->
-          <!--            <span class="el-dropdown-link">-->
-          <!--              <img style="height: 50px; width: 50px; border-radius: 50%"-->
-          <!--                   :src="avatar" alt="">-->
-          <!--            </span>-->
-          <!--            <el-dropdown-menu slot="dropdown">-->
-          <!--              <el-dropdown-item>-->
-          <!--                <el-button type="text" style="color: black"-->
-          <!--                           @click="jumpToPath('/mySpace')">-->
-          <!--                  个人中心-->
-          <!--                </el-button>-->
-          <!--              </el-dropdown-item>-->
-          <!--              <el-dropdown-item style="color: black">-->
-          <!--                <el-button type="text" style="color: black"-->
-          <!--                           @click="logout">-->
-          <!--                  退出登录-->
-          <!--                </el-button>-->
-          <!--              </el-dropdown-item>-->
-          <!--            </el-dropdown-menu>-->
-          <!--          </el-dropdown>-->
           <el-dropdown>
-            <el-button type="primary">
-              更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
-            </el-button>
+                      <span class="el-dropdown-link">
+                        <img style="height: 50px; width: 50px; border-radius: 50%"
+                             :src="require('@/assets/icon/bilibiliavatar.png')" alt="">
+                      </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>黄金糕</el-dropdown-item>
-              <el-dropdown-item>狮子头</el-dropdown-item>
-              <el-dropdown-item>螺蛳粉</el-dropdown-item>
-              <el-dropdown-item>双皮奶</el-dropdown-item>
-              <el-dropdown-item>蚵仔煎</el-dropdown-item>
+              <el-dropdown-item>
+                <el-button type="text" style="color: black"
+                           @click="jumpToPath('/mySpace')">
+                  个人中心
+                </el-button>
+              </el-dropdown-item>
+              <el-dropdown-item style="color: black">
+                <el-button type="text" style="color: black"
+                           @click="logout">
+                  退出登录
+                </el-button>
+              </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
+          <!--          <el-dropdown>-->
+          <!--            <el-button type="primary">-->
+          <!--              更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+          <!--            </el-button>-->
+          <!--            <el-dropdown-menu slot="dropdown">-->
+          <!--              <el-dropdown-item>黄金糕</el-dropdown-item>-->
+          <!--              <el-dropdown-item>狮子头</el-dropdown-item>-->
+          <!--              <el-dropdown-item>螺蛳粉</el-dropdown-item>-->
+          <!--              <el-dropdown-item>双皮奶</el-dropdown-item>-->
+          <!--              <el-dropdown-item>蚵仔煎</el-dropdown-item>-->
+          <!--            </el-dropdown-menu>-->
+          <!--          </el-dropdown>-->
         </div>
         <div v-else class="user-center">
           <el-button class="login-button" type="text" @click="dialogVisible = true">
@@ -199,11 +201,12 @@ export default {
               :visible.sync="dialogVisible"
               width="30%">
             <!--            :before-close="handleClose">-->
-            <span>这是一段信息</span>
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="dialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-            </span>
+<!--            <span>这是一段信息</span>-->
+<!--            <span slot="footer" class="dialog-footer">-->
+<!--              <el-button @click="dialogVisible = false">取 消</el-button>-->
+<!--              <el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
+<!--            </span>-->
+            <LoginDialog/>
           </el-dialog>
 
         </div>
@@ -371,12 +374,13 @@ export default {
     align-items: center;
     justify-content: space-between;
 
-    .left-entry{
+    .left-entry {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-left: 40px;
-      span{
+
+      span {
         margin-right: 20px;
         color: white;
         font-weight: bolder;
@@ -384,11 +388,12 @@ export default {
       }
     }
 
-    .center-search-bar{
+    .center-search-bar {
       flex: 1 auto;
       min-width: 181px;
       max-width: 500px;
-      .nav-search-form{
+
+      .nav-search-form {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -397,7 +402,8 @@ export default {
         background-color: white;
         border-radius: 8px;
         opacity: 0.8;
-        .nav-search-content{
+
+        .nav-search-content {
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -405,7 +411,8 @@ export default {
           height: 36px;
           border: 2px solid transparent;
           border-radius: 6px;
-          .nav-search-input{
+
+          .nav-search-input {
             width: 100%;
             font-size: 14px;
             padding-right: 8px;
@@ -416,7 +423,7 @@ export default {
           }
         }
 
-        .nav-search-btn{
+        .nav-search-btn {
           margin: 0;
           padding: 0;
           width: 32px;

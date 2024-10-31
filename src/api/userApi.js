@@ -16,20 +16,20 @@ export default {
         return await httpRequest.post('/users',params);
     },
 
-    // /**
-    //  * 用户登录（单token）
-    //  */
-    // async getUserToken(params){
-    //     return await httpRequest.post('user-tokens', params);
-    // },
+    /**
+     * 用户登录（单token）
+     */
+    async getUserToken(params){
+        return await httpRequest.post('user-tokens', params);
+    },
 
-    // /**
-    //  * 用户登录（双token）
-    //  */
-    // async getUserTokenAndRefreshToken(params){
-    //     return await httpRequest.post('user-dts', params);
-    // },
-    //
+    /**
+     * 用户登录（双token）
+     */
+    async getUserTokenAndRefreshToken(params){
+        return await httpRequest.post('user-dts', params);
+    },
+
     // /**
     //  * 获取用户基本信息
     //  */
