@@ -1,12 +1,12 @@
 <script>
 import userApi from "@/api/userApi";
-// import CommonHeader from "@/components/CommonHeader.vue";
-// import MainPageContent from "@/components/MainPageContent.vue";
+import CommonHeader from "@/components/CommonHeader.vue";
+import MainPageContent from "@/components/MainPageContent.vue";
 //import httpRequest from "@/axios/axiosConfig";
 
 export default {
   name: "MainPage",
-  // components: {MainPageContent, CommonHeader},
+  components: { MainPageContent,CommonHeader},
   data(){
     return{
       pk:''
@@ -72,7 +72,7 @@ export default {
 
   },
   mounted() {
-    this.getRsaPublicKey();
+    // this.getRsaPublicKey();
     //
     // this.addUser();
     //
@@ -132,9 +132,8 @@ export default {
 
 <template>
   <div>
-<!--    <CommonHeader/>-->
-<!--    <MainPageContent/>-->
-    mainpage
+    <CommonHeader/>
+    <MainPageContent/>
   </div>
 </template>
 

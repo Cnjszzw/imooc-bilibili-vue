@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 //import HelloWorld   from "@/components/HelloWorld.vue";
 import UserLogin from "@/components/UserLogin.vue";
 import mainPage from "@/components/MainPage.vue";
+import MySpaceHome from "@/components/MySpaceHome.vue";
+import MySpacePost from "@/components/MySpacePost.vue";
 // import MainPage from "@/components/MainPage.vue";
 // import MySpaceHome from "@/components/mySpace/MySpaceHome.vue";
 // import MySpacePost from "@/components/mySpace/MySpacePost.vue";
@@ -23,6 +25,19 @@ const routes = [
         // 首页
         path:'/',
         component:mainPage,
+        redirect:'home',
+        children:[
+            {
+                // 个人中心-首页
+                path: '/home',
+                component: MySpaceHome
+            },
+            {
+                // 个人中心-我的投稿
+                path: '/post',
+                component: MySpacePost
+            }
+        ]
     },
     {
         // 注册登录页
