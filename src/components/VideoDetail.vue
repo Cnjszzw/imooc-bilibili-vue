@@ -5,6 +5,7 @@ import Player, {Danmu} from 'xgplayer';
 import 'xgplayer/dist/index.min.css';
 import 'xgplayer/es/plugins/danmu/index.css'
 import {Events} from "xgplayer";
+import VideoComment from "@/components/VideoComment.vue";
 // import VideoComment from "@/components/VideoComment.vue";
 // import userUtils from "@/utils/userUtils";
 // import userApi from "@/api/userApi";
@@ -15,7 +16,7 @@ export default {
   name: "VideoDetail",
   //mixins:[userUtils],
   // components: {LoginDialog, VideoComment, CommonHeader},
-  components: {CommonHeader},
+  components: {VideoComment, CommonHeader},
   data(){
     return {
       videoDetail:{
@@ -374,7 +375,9 @@ export default {
           </div>
         </div>
 
-<!--        <VideoComment v-if="this.$store.state.showVideoCommentComponent" />-->
+<!--        <video-comment/>-->
+
+        <VideoComment v-if="this.$store.state.showVideoCommentComponent" />
 
 <!--      </div>-->
 <!--      <div class="right-container">-->

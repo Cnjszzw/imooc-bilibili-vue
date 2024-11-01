@@ -170,7 +170,7 @@ export default {
         {
           id:1,
           title:'title1',
-          thumbnail:require('@/assets/banner/1.jpg'),
+          thumbnail:"",
           createTime: '2023-12-16 10:30:42',
           danmuCount:20,
           viewCount:10
@@ -178,7 +178,7 @@ export default {
         {
           id:2,
           title:'title2',
-          thumbnail:require('@/assets/banner/2.jpg'),
+          thumbnail:"",
           createTime: '2023-12-17 10:30:42',
           danmuCount:30,
           viewCount:20
@@ -186,7 +186,7 @@ export default {
         {
           id:3,
           title:'title3',
-          thumbnail:require('@/assets/banner/3.jpg'),
+          thumbnail:"",
           createTime: '2023-12-18 10:30:42',
           danmuCount:10,
           viewCount:40
@@ -234,6 +234,13 @@ export default {
         $state.complete();
       });
     },
+    //
+    // async loadThumbnail() {
+    //   const thumbnail = this.video.thumbnail; // 获取原始缩略图 URL
+    //   videoApi.getThumbnailImage(thumbnail).then(response => {
+    //     this.video.thumbnail = response.data; // 假设返回的是图片数据
+    //   });
+    // }
     //
     // async getVideoRecommendations(){
     //   if(this.isUserLoggedIn){
@@ -316,7 +323,13 @@ export default {
 
       <div class="video-container" v-for="video in videos" :key="video.id"
           @click="jumpToVideoDetail(video)">
-        <img :src="video.thumbnail" class="thumbnail" alt="">
+<!--        <img :src="video.thumbnail" class="thumbnail" alt="">-->
+<!--        <img v-if="video.thumbnail" :src="video.thumbnail" class="thumbnail" alt="">-->
+
+        <img v-if="video.thumbnail" :src="`http://localhost:8080/viewImage?url=${video.thumbnail}`" class="thumbnail" alt="">
+
+        <img v-else :src="require('@/assets/defaultPage.png')" class="thumbnail" alt="Default Thumbnail">
+
         <span>{{video.title}}</span>
         <div class="videos-details">
           <div class="video-count-item">

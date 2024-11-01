@@ -2,6 +2,12 @@ import httpRequest from "@/axios/axiosConfig";
 
 export default {
 
+    // //获取视频封面接口
+    // // 获取视频封面图片
+    // getThumbnailImage(url) {
+    //     return httpRequest.get('/viewImage', { params: { url: url } });
+    // },
+
     //视频分页查询
     async pageListVideos(params){
         return await httpRequest.get('/videos', params);
@@ -110,17 +116,17 @@ export default {
         }
         return await httpRequest.get('/video-view-counts', params);
     },
-    //
-    // //添加视频评论
-    // async addVideoComment(params){
-    //     return await httpRequest.post('/video-comments', params);
-    // },
-    //
-    // //分页查询视频评论
-    // async pageListVideoComments(params){
-    //     return await httpRequest.get('/video-comments', params);
-    // },
-    //
+
+    //添加视频评论
+    async addVideoComment(params){
+        return await httpRequest.post('/video-comments', params);
+    },
+
+    //分页查询视频评论
+    async pageListVideoComments(params){
+        return await httpRequest.get('/video-comments', params);
+    },
+
     // //更新收藏视频
     // async updateVideoCollections(params) {
     //     return await httpRequest.put('/video-collections', params);
