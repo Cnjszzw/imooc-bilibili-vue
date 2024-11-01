@@ -199,17 +199,17 @@ export default {
   },
   methods:{
     jumpToVideoDetail(video){
-      console.log(video)
-      // if(video){
-      //   this.$router.push({
-      //     path:'videoDetail',
-      //     query:{
-      //       videoId:video.id
-      //     }
-      //   });
-      // }else{
-      //   this.$router.push('/videoDetail');
-      // }
+      // console.log(video)
+      if(video){
+        this.$router.push({
+          path:'videoDetail',
+          query:{
+            videoId:video.id
+          }
+        });
+      }else{
+        this.$router.push('/videoDetail');
+      }
     },
 
     pageListVideos($state){

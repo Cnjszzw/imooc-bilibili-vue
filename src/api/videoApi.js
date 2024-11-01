@@ -26,90 +26,90 @@ export default {
         return await httpRequest.post('videos', params);
     },
 
-    // //获取视频详情
-    // async getVideoDetail(videoId){
-    //     let config = {
-    //         params:{
-    //             videoId:videoId
-    //         }
-    //     };
-    //     return await httpRequest.get('video-details', config);
-    // },
-    //
-    // //添加视频播放记录
-    // async addVideoViews(params){
-    //     return await httpRequest.post('video-views',params);
-    // },
-    //
-    // //查询视频点赞数量
-    // async getVideoLikes (videoId) {
-    //     let params = {
-    //         params:{videoId:videoId}
-    //     }
-    //     return await httpRequest.get('/video-likes', params);
-    // },
-    //
-    // //查询视频投币数量
-    // async getVideoCoins (videoId) {
-    //     let params = {
-    //         params:{videoId:videoId}
-    //     }
-    //     return await httpRequest.get('/video-coins', params);
-    // },
-    //
-    // //查询视频收藏数量
-    // async getVideoCollections (videoId) {
-    //     let params = {
-    //         params:{videoId:videoId}
-    //     }
-    //     return await httpRequest.get('/video-collections', params);
-    // },
-    //
-    // //点赞视频
-    // async addVideoLike(videoId) {
-    //     let params = {
-    //         videoId:videoId
-    //     }
-    //     return await httpRequest.post('/video-likes', params,{
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data'
-    //         }
-    //     });
-    // },
-    //
-    // //取消点赞视频
-    // async deleteVideoLike(videoId) {
-    //     let params = {
-    //         params:{videoId:videoId}
-    //     }
-    //     return await httpRequest.delete('/video-likes', params);
-    // },
-    //
-    // //视频投币
-    // async addVideoCoins(params){
-    //     return await httpRequest.post('/video-coins', params);
-    // },
-    //
-    // //收藏视频
-    // async addVideoCollection(params){
-    //     return await httpRequest.post('/video-collections', params);
-    // },
-    //
-    // //取消收藏视频
-    // async deleteVideoCollection(videoId) {
-    //     let params = {
-    //         params:{videoId:videoId}
-    //     }
-    //     return await httpRequest.delete('/video-collections', params);
-    // },
-    //
-    // //查询视频播放量
-    // async getVideoViewCounts (videoId) {
-    //     let params = {
-    //         params:{videoId:videoId}
-    //     }
-    //     return await httpRequest.get('/video-view-counts', params);
-    // },
+    //获取视频详情
+    async getVideoDetail(videoId){
+        let config = {
+            params:{
+                videoId:videoId
+            }
+        };
+        return await httpRequest.get('video-details', config);
+    },
+
+    //添加视频播放记录
+    async addVideoViews(params){
+        return await httpRequest.post('video-views',params);
+    },
+
+    //查询视频点赞数量
+    async getVideoLikes (videoId) {
+        let params = {
+            params:{videoId:videoId}
+        }
+        return await httpRequest.get('/video-likes', params);
+    },
+
+    //查询视频投币数量
+    async getVideoCoins (videoId) {
+        let params = {
+            params:{videoId:videoId}
+        }
+        return await httpRequest.get('/video-coins', params);
+    },
+
+    //查询视频收藏数量
+    async getVideoCollections (videoId) {
+        let params = {
+            params:{videoId:videoId}
+        }
+        return await httpRequest.get('/video-collections', params);
+    },
+
+    //点赞视频
+    async addVideoLike(videoId) {
+        let params = {
+            videoId:videoId
+        }
+        return await httpRequest.post('/video-likes', params,{
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    },
+
+    //取消点赞视频
+    async deleteVideoLike(videoId) {
+        let params = {
+            params:{videoId:videoId}
+        }
+        return await httpRequest.delete('/video-likes', params);
+    },
+
+    //视频投币
+    async addVideoCoins(params){
+        return await httpRequest.post('/video-coins', params);
+    },
+
+    //收藏视频
+    async addVideoCollection(params){
+        return await httpRequest.post('/video-collections', params);
+    },
+
+    //取消收藏视频
+    async deleteVideoCollection(videoId) {
+        let params = {
+            params:{videoId:videoId}
+        }
+        return await httpRequest.delete('/video-collections', params);
+    },
+
+    //查询视频播放量
+    async getVideoViewCounts (videoId) {
+        let params = {
+            params:{videoId:videoId}
+        }
+        return await httpRequest.get('/video-view-counts', params);
+    },
     //
     // //添加视频评论
     // async addVideoComment(params){
