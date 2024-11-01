@@ -7,25 +7,25 @@ export default {
         return await httpRequest.get('/videos', params);
     },
 
-    // //分片上传文件
-    // async uploadFileBySlices(formData){
-    //     return await httpRequest.put('file-slices', formData, {
-    //         headers:{
-    //             'Content-type':'multipart/form-data'
-    //         }
-    //     });
-    // },
-    //
-    // //添加视频播放记录
-    // async addTag(params){
-    //     return await httpRequest.post('tags', params);
-    // },
-    //
-    // //视频投稿
-    // async postVideo(params){
-    //     return await httpRequest.post('videos', params);
-    // },
-    //
+    //分片上传文件
+    async uploadFileBySlices(formData){
+        return await httpRequest.put('file-slices', formData, {
+            headers:{
+                'Content-type':'multipart/form-data'
+            }
+        });
+    },
+
+    //添加视频播放记录(标签吧是)
+    async addTag(params){
+        return await httpRequest.post('tags', params);
+    },
+
+    //视频投稿
+    async postVideo(params){
+        return await httpRequest.post('videos', params);
+    },
+
     // //获取视频详情
     // async getVideoDetail(videoId){
     //     let config = {

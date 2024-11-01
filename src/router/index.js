@@ -5,6 +5,7 @@ import UserLogin from "@/components/UserLogin.vue";
 import mainPage from "@/components/MainPage.vue";
 import MySpaceHome from "@/components/MySpaceHome.vue";
 import MySpacePost from "@/components/MySpacePost.vue";
+import postContent from "@/components/PostContent.vue";
 // import MainPage from "@/components/MainPage.vue";
 // import MySpaceHome from "@/components/mySpace/MySpaceHome.vue";
 // import MySpacePost from "@/components/mySpace/MySpacePost.vue";
@@ -48,6 +49,11 @@ const routes = [
                 component: MySpacePost
             }
         ]
+    },
+    {
+        // 视频投稿
+        path:'/postContent',
+        component:postContent
     },
 
 ]

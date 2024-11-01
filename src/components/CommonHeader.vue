@@ -341,7 +341,7 @@ export default {
           </div>
           <div class="post">
             <el-button type="warning" icon="el-icon-upload2" circle
-                       @click="jumpWithLoginUser('userLogin')"></el-button>
+                       @click="jumpWithLoginUser('postContent')"></el-button>
             <span>投稿</span>
           </div>
 
