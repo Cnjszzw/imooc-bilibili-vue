@@ -127,10 +127,10 @@ export default {
         return await httpRequest.get('/video-comments', params);
     },
 
-    // //更新收藏视频
-    // async updateVideoCollections(params) {
-    //     return await httpRequest.put('/video-collections', params);
-    // },
+    //更新收藏视频
+    async updateVideoCollections(params) {
+        return await httpRequest.put('/video-collections', params);
+    },
     //
     // //使用elasticsearch分页查询视频列表
     // async pageListVideosByEs (params) {

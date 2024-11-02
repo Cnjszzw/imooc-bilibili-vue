@@ -154,43 +154,43 @@ export default {
       ],
       recommendedVideos:[
         {
-          id:1,
+          id:55,
           thumbnail:require('@/assets/banner/1.jpg')
         },
         {
-          id:2,
+          id:55,
           thumbnail:require('@/assets/banner/2.jpg')
         },
         {
-          id:3,
+          id:55,
           thumbnail:require('@/assets/banner/3.jpg')
         }
       ],
       videos:[
-        {
-          id:1,
-          title:'title1',
-          thumbnail:"",
-          createTime: '2023-12-16 10:30:42',
-          danmuCount:20,
-          viewCount:10
-        },
-        {
-          id:2,
-          title:'title2',
-          thumbnail:"",
-          createTime: '2023-12-17 10:30:42',
-          danmuCount:30,
-          viewCount:20
-        },
-        {
-          id:3,
-          title:'title3',
-          thumbnail:"",
-          createTime: '2023-12-18 10:30:42',
-          danmuCount:10,
-          viewCount:40
-        }
+        // {
+        //   id:1,
+        //   title:'title1',
+        //   thumbnail:"",
+        //   createTime: '2023-12-16 10:30:42',
+        //   danmuCount:20,
+        //   viewCount:10
+        // },
+        // {
+        //   id:2,
+        //   title:'title2',
+        //   thumbnail:"",
+        //   createTime: '2023-12-17 10:30:42',
+        //   danmuCount:30,
+        //   viewCount:20
+        // },
+        // {
+        //   id:3,
+        //   title:'title3',
+        //   thumbnail:"",
+        //   createTime: '2023-12-18 10:30:42',
+        //   danmuCount:10,
+        //   viewCount:40
+        // }
       ],
       infiniteId:1,
       currentPage:1
