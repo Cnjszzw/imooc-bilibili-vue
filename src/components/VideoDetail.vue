@@ -569,7 +569,7 @@ export default {
         img{
           width: 60px;
           height: 60px;
-          border-radius: 5px;
+          border-radius: 100%;
         }
       }
       .up-info-right{
