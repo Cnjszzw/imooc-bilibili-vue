@@ -97,7 +97,7 @@ export default {
     },
 
     async initPlayer(){
-      const videoUrl = 'http://localhost:8080/video-slices?url=' + this.videoDetail.url;
+      const videoUrl = 'http://124.221.69.18:8070/video-slices?url=' + this.videoDetail.url;
       const danmuList = await this.getDanmus();
       if(danmuList && danmuList.length > 0){
         danmuList.forEach(item =>{
@@ -155,7 +155,7 @@ export default {
     },
 
     initWebsocket(){
-      const url = 'ws://localhost:8080/imserver/' + localStorage.getItem('token');
+      const url = 'ws://124.221.69.18:8070/imserver/' + localStorage.getItem('token');
       console.log(url);
       this.ws = new WebSocket(url);
       this.ws.onmessage = (event) =>{

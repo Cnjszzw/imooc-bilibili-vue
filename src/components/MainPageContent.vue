@@ -326,7 +326,7 @@ export default {
 <!--        <img :src="video.thumbnail" class="thumbnail" alt="">-->
 <!--        <img v-if="video.thumbnail" :src="video.thumbnail" class="thumbnail" alt="">-->
 
-        <img v-if="video.thumbnail" :src="`http://localhost:8080/viewImage?url=${video.thumbnail}`" class="thumbnail" alt="">
+        <img v-if="video.thumbnail" :src="`http://124.221.69.18:8070/viewImage?url=${video.thumbnail}`" class="thumbnail" alt="">
 
         <img v-else :src="require('@/assets/defaultPage.png')" class="thumbnail" alt="Default Thumbnail">
 

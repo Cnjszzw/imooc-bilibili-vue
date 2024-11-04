@@ -52,7 +52,7 @@ export default {
       if (files.length > 0) {
         this.selectedFile = files[0];
         const response = await this.uploadFileBySlices(this.selectedFile);
-        const avatar = 'http://localhost:8080/group1/' + response.data;
+        const avatar = 'http://124.221.69.18:8070/group1/' + response.data;
         console.log('new avatar: ', avatar);
         let params = {
           avatar:avatar

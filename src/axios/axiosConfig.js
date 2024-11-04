@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const httpRequest = axios.create({
     // 请求的后端接口的基础路径
-    baseURL:'http://localhost:8080',
+    baseURL:'http://124.221.69.18:8070',
     // 接口超时响应时间
     timeout:10000
 });
