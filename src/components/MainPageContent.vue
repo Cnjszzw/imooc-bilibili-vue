@@ -344,12 +344,10 @@ export default {
             {{video.createTime}}
           </div>
         </div>
-
       </div>
       <infinite-loading :infinite-id="infiniteId"
                         @infinite="pageListVideos">
       </infinite-loading>
-
     </div>
 
 
@@ -361,6 +359,14 @@ export default {
 <!--      </el-menu-item>-->
 <!--    </el-menu>-->
 <!--    <router-view></router-view>-->
+    <div style="text-align: center; font-weight: bold; font-size: 24px;">
+      <a href="https://beian.miit.gov.cn/" target="_blank">苏ICP备2024115942号-1</a>
+    </div>
+
+
+    <p style="text-align: center; font-weight: bold; font-size: 16px;">
+     © 2024 赵志文. All rights reserved.
+    </p>
 
   </div>
 </template>
