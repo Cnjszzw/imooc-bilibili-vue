@@ -19,7 +19,7 @@ export default {
         },
 
         //用户注册
-        async userRegister(account, password){
+        async userRegister(accountType , account, password){
             let response = await userApi.getRsaPublicKey();
             //ES6 解构语句
             const {data:rsaPk} = response;
@@ -32,14 +32,15 @@ export default {
         },
 
         //用户登录
-        async userLogin(account, password) {
+        async userLogin(accountType , account, password) {
             try {
                 let response = await userApi.getRsaPublicKey();
                 //ES6 解构语句
                 const {data:rsaPk} = response;
                 let encryptPwd = this.encryptPassword(password, rsaPk);
                 const params = {
-                    phone: account,
+                    accountType : accountType,
+                    account: account,
                     password: encryptPwd
                 }
                 let token = null;

@@ -6,6 +6,7 @@ export default {
   mixins: [userUtils],
   data() {
     return {
+      accountType: '',
       account: '',
       password: ''
     }
@@ -13,7 +14,7 @@ export default {
   methods: {
     async userRegisterFromDialog() {
       try {
-        await this.userRegister(this.account, this.password);
+        await this.userRegister(this.accountType ,this.account, this.password);
         window.alert('注册成功，请点击登录按钮进行登录');
       } catch (e) {
         window.alert('注册失败');
@@ -22,7 +23,7 @@ export default {
 
     async userLoginFromDialog() {
       try {
-        await this.userLogin(this.account, this.password);
+        await this.userLogin(this.accountType , this.account, this.password);
         location.reload();
       } catch (e) {
         window.alert('登录失败');
@@ -39,10 +40,19 @@ export default {
     <form class="login-form">
       <div class="form-item">
         <div class="form-info">
+          账号类型
+        </div>
+        <select v-model="accountType" class="account-type-select">
+          <option value="email">邮箱</option>
+          <option value="phone">手机号码</option>
+        </select>
+      </div>
+      <div class="form-item">
+        <div class="form-info">
           账号
         </div>
         <input v-model="account" autocomplete="on" maxlength="32"
-               placeholder="请输入账号" type="text">
+               :placeholder="accountType === 'email' ? '请输入邮箱(暂时只支持手机注册)' : '请输入手机号码(暂时只支持手机注册)'" type="text">
       </div>
       <div class="form-separator-line"></div>
       <div class="form-item">
@@ -67,6 +77,7 @@ export default {
     </div>
   </div>
 
+
 </template>
 
 <style scoped lang="less">
@@ -77,7 +88,7 @@ export default {
 
   .login-form {
     width: 400px;
-    height: 100px;
+    height: 150px;
     border: 1px solid #e3e5e7;
     border-radius: 8px;
     font-size: 14px;
