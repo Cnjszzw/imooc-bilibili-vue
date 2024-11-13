@@ -48,7 +48,8 @@ export default {
       ws:null,
       activeNames:['1'],
       tableData:[],
-      danmus:[]
+      danmus:[],
+      VideoTripleClicks:{}
     }
   },
 
@@ -90,6 +91,8 @@ export default {
         await this.getVideoCollections();
         //获取视频的播放量
         await this.getVideoViewCounts();
+        //获取一键三连的数据
+        await this.getVideoTripleClicks();
       }
       if(this.isUserLoggedIn){
         await this.getUserFollowings();
@@ -231,6 +234,11 @@ export default {
     async getVideoViewCounts(){
       let response = await videoApi.getVideoViewCounts(this.$route.query.videoId);
       this.viewCount = response.data !== null ? response.data : this.viewCount;
+    },
+
+    async getVideoTripleClicks(){
+      let response = await videoApi.getVideoTripleClicks(this.$route.query.videoId);
+      this.videoTripleClicks = response.data !== null ? response.data : this.videoTripleClicks;
     },
 
     async addUserFollowings(followingId){

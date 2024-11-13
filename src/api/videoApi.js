@@ -117,6 +117,14 @@ export default {
         return await httpRequest.get('/video-view-counts', params);
     },
 
+    //查询视频一键三连情况
+    async getVideoTripleClicks (videoId) {
+        let params = {
+            params:{videoId:videoId}
+        }
+        return await httpRequest.get('/video-triple-clicks', params);
+    },
+
     //添加视频评论
     async addVideoComment(params){
         return await httpRequest.post('/video-comments', params);
