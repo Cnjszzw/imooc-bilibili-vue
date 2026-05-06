@@ -1,12 +1,14 @@
 <script>
 import userUtils from "@/utils/userUtils";
 import userCenterApi from "@/api/userCenterApi";
+import config from "@/config";
 
 export default {
   name: "MySpacePost",
   mixins:[userUtils],
   data(){
     return {
+      BASE_URL: config.BASE_URL,
       activeIndex:'0',
       areaList:[
         {
@@ -55,6 +57,10 @@ export default {
   },
 
   methods:{
+
+    handleThumbnailError(e) {
+      e.target.src = require('@/assets/defaultPage.png');
+    },
 
     async getUserCenterVideoAreas(){
       const response = await userCenterApi.getUserCenterVideoAreas();
@@ -125,7 +131,7 @@ export default {
              :key="index">
           <div class="videos-item-detail" v-if="video.visible">
             <div class="video-img">
-              <img :src=video.thumbnail class="image" alt="">
+              <img :src="`${BASE_URL}/viewImage?url=${video.thumbnail}`" class="image" alt="" @error="handleThumbnailError">
             </div>
             <div class="video-info">
               <div class="video-info-title">

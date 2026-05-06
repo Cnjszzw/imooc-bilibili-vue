@@ -4,12 +4,14 @@ import userUtils from "@/utils/userUtils";
 import routerUtils from "@/utils/routerUtils";
 import videoApi from "@/api/videoApi";
 import MoveCollectionDialog from "@/components/MoveCollectionDialog.vue";
+import config from "@/config";
 export default {
   name: "MySpaceCollection",
   components: {MoveCollectionDialog},
   mixins:[userUtils,routerUtils],
   data(){
     return{
+      BASE_URL: config.BASE_URL,
       showAddCollectionDialog:false,
       groupName:'',
       collectionGroups:[],
@@ -26,6 +28,10 @@ export default {
   },
 
   methods:{
+
+    handleThumbnailError(e) {
+      e.target.src = require('@/assets/defaultPage.png');
+    },
 
     async handleMenuClick(groupId){
       this.currentGroupId = groupId;
@@ -132,7 +138,7 @@ export default {
              :key="collection.videoInfo.id">
           <div class="collection-videos-item-detail">
             <div class="collection-video-img">
-              <img :src=collection.videoInfo.thumbnail class="image" alt="">
+              <img :src="`${BASE_URL}/viewImage?url=${collection.videoInfo.thumbnail}`" class="image" alt="" @error="handleThumbnailError">
             </div>
             <div class="collection-video-info">
               <div class="collection-video-info-title" @click="jumpToVideoDetail(collection.videoInfo.id)">

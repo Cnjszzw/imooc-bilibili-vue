@@ -1,8 +1,9 @@
 import axios from 'axios';
+import config from '@/config';
 
 const httpRequest = axios.create({
     // 请求的后端接口的基础路径
-    baseURL:'http://124.221.69.18:8070',
+    baseURL: config.BASE_URL,
     // 接口超时响应时间
     timeout:10000
 });

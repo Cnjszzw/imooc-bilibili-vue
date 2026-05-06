@@ -11,6 +11,7 @@ import userUtils from "@/utils/userUtils";
 import userApi from "@/api/userApi";
 import LoginDialog from "@/components/LoginDialog.vue";
 import danmuApi from "@/api/danmuApi";
+import config from "@/config";
 
 export default {
   name: "VideoDetail",
@@ -19,6 +20,8 @@ export default {
   components: {LoginDialog,VideoComment, CommonHeader},
   data(){
     return {
+      BASE_URL: config.BASE_URL,
+      WS_URL: config.WS_URL,
       videoDetail:{
         title:'title',
         createTime:'',
@@ -54,6 +57,10 @@ export default {
   },
 
   methods:{
+
+    handleAvatarError(e) {
+      e.target.src = require('@/assets/icon/bilibiliavatar.png');
+    },
 
     async getDanmus(){
       const videoId = this.$route.query.videoId;
@@ -100,7 +107,7 @@ export default {
     },
 
     async initPlayer(){
-      const videoUrl = 'http://124.221.69.18:8070/video-slices?url=' + this.videoDetail.url;
+      const videoUrl = this.BASE_URL + '/video-slices?url=' + this.videoDetail.url;
       const danmuList = await this.getDanmus();
       if(danmuList && danmuList.length > 0){
         danmuList.forEach(item =>{
@@ -158,7 +165,7 @@ export default {
     },
 
     initWebsocket(){
-      const url = 'ws://124.221.69.18:8070/imserver/' + localStorage.getItem('token');
+      const url = this.WS_URL + '/imserver/' + localStorage.getItem('token');
       console.log(url);
       this.ws = new WebSocket(url);
       this.ws.onmessage = (event) =>{
@@ -392,7 +399,7 @@ export default {
 <!--        视频投稿的up主信息-->
         <div class="up-info-container">
           <div class="up-avatar">
-            <img :src="videoUpInfo.avatar" alt="">
+            <img :src="videoUpInfo.avatar" @error="handleAvatarError" alt="">
           </div>
           <div class="up-info-right">
             <div class="up-info-detail">

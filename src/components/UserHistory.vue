@@ -3,6 +3,7 @@ import CommonHeader from "@/components/CommonHeader.vue";
 import userUtils from "@/utils/userUtils";
 import routerUtils from "@/utils/routerUtils";
 import userHistoryApi from "@/api/userHistoryApi";
+import config from "@/config";
 
 export default {
   name: "UserHistory",
@@ -10,6 +11,7 @@ export default {
   mixins:[userUtils, routerUtils],
   data(){
     return {
+      BASE_URL: config.BASE_URL,
       histories:[],
       infiniteId:+new Date(),
       currentPage:1,
@@ -17,6 +19,10 @@ export default {
     }
   },
   methods:{
+
+    handleThumbnailError(e) {
+      e.target.src = require('@/assets/defaultPage.png');
+    },
 
     pageListUserHistory($state){
       let params = {
@@ -66,7 +72,7 @@ export default {
       <div class="user-history-list">
         <div class="user-history-list-item" v-for="(history, index) in histories"
              :key="index">
-          <img :src="history.thumbnail" alt="">
+          <img :src="`${BASE_URL}/viewImage?url=${history.thumbnail}`" alt="" @error="handleThumbnailError">
           <div class="user-history-video-detail">
             <div class="user-history-video-detail-title"
                  @click="jumpToVideoDetail(history.videoId)"

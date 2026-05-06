@@ -2,12 +2,14 @@
 import userUtils from "@/utils/userUtils";
 import userCenterApi from "@/api/userCenterApi";
 import routerUtils from "@/utils/routerUtils";
+import config from "@/config";
 
 export default {
   name: "MySpaceHome",
   mixins:[userUtils, routerUtils],
   data(){
     return {
+      BASE_URL: config.BASE_URL,
       videoCount:0,
       myPostVideos:[],
       collectionCount:0,
@@ -18,6 +20,10 @@ export default {
   },
 
   methods:{
+
+    handleThumbnailError(e) {
+      e.target.src = require('@/assets/defaultPage.png');
+    },
 
     async pageListVideos(){
       let params = {
@@ -48,8 +54,8 @@ export default {
         this.myCollectionGroups.forEach(group => {
           group.thumbnail = require('@/assets/icon/shoucangjia.png');
           const list = this.myCollections.filter(item => item.groupId === group.groupId);
-          if(list[0]){
-            group.thumbnail = list[0].videoInfo.thumbnail;
+          if(list[0] && list[0].videoInfo.thumbnail){
+            group.thumbnail = this.BASE_URL + '/viewImage?url=' + list[0].videoInfo.thumbnail;
           }
         })
       }
@@ -85,7 +91,7 @@ export default {
       <div class="home-post-content-item" v-for="(myPostVideo,index) in myPostVideos"
            :key="index">
         <div class="home-post-content-item-thumbnail">
-          <img :src="myPostVideo.thumbnail" alt="">
+          <img :src="`${BASE_URL}/viewImage?url=${myPostVideo.thumbnail}`" alt="" @error="handleThumbnailError">
         </div>
         <div class="home-post-content-item-title">
           {{myPostVideo.title}}
@@ -122,7 +128,7 @@ export default {
       <div class="home-collection-content-item"
            v-for="(collectionGroup, index) in myCollectionGroups" :key="index">
         <div class="home-collection-content-item-thumbnail">
-          <img :src="collectionGroup.thumbnail" alt="">
+          <img :src="collectionGroup.thumbnail" alt="" @error="handleThumbnailError">
           <span>{{collectionGroup.count}}</span>
         </div>
         <div class="home-collection-content-item-title">

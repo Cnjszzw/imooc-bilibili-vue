@@ -29,6 +29,10 @@ export default {
 
   methods:{
 
+    handleAvatarError(e) {
+      e.target.src = require('@/assets/icon/bilibiliavatar.png');
+    },
+
     async getUserCenterFollowingGroups(){
       const response = await userCenterApi.getUserCenterFollowingGroups();
       if(response.data){
@@ -200,7 +204,7 @@ export default {
 <!--            用户信息-->
             <div class="item-infos">
               <div class="avatar">
-                <img :src=userFollowing.userInfo.avatar class="image" alt="">
+                <img :src=userFollowing.userInfo.avatar @error="handleAvatarError" class="image" alt="">
               </div>
               <div class="description">
                 <div class="nick">
@@ -263,7 +267,7 @@ export default {
 <!--            用户信息-->
             <div class="item-infos">
               <div class="avatar">
-                <img :src=userFan.userInfo.avatar class="image" alt="">
+                <img :src=userFan.userInfo.avatar @error="handleAvatarError" class="image" alt="">
               </div>
               <div class="description">
                 <div class="nick">

@@ -27,6 +27,10 @@ export default {
 
   methods:{
 
+    handleAvatarError(e) {
+      e.target.src = require('@/assets/icon/bilibiliavatar.png');
+    },
+
     async addVideoComment(){
       let params = {
         videoId:this.$route.query.videoId,
@@ -173,7 +177,7 @@ export default {
           <div class="comment-root-reply-container"
                v-for="rootComment in videoCommentList" :key="rootComment.id">
             <div class="root-reply-avatar">
-              <img :src="rootComment.userInfo.avatar" alt="" >
+              <img :src="rootComment.userInfo.avatar" @error="handleAvatarError" alt="" >
             </div>
             <div class="total-reply-content-container">
 <!--              一级评论-->
@@ -202,7 +206,7 @@ export default {
                    v-for="childComment in rootComment.childList" :key="childComment.id">
                 <div class="sub-reply-userInfo">
                   <div class="sub-reply-avatar">
-                    <img :src="childComment.userInfo.avatar" alt="">
+                    <img :src="childComment.userInfo.avatar" @error="handleAvatarError" alt="">
                   </div>
                 </div>
                 <div class="sub-reply-content">

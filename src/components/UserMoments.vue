@@ -4,6 +4,7 @@ import userMomentApi from "@/api/userMomentApi";
 import fileUtils from "@/utils/fileUtils";
 import userUtils from "@/utils/userUtils";
 import routerUtils from "@/utils/routerUtils";
+import config from "@/config";
 
 export default {
   name: "UserMoments",
@@ -11,6 +12,7 @@ export default {
   mixins:[fileUtils, userUtils, routerUtils],
   data(){
     return {
+      BASE_URL: config.BASE_URL,
       postTxt:'',
       imagePreview:null,
       selectedFile:null,
@@ -39,6 +41,10 @@ export default {
     }
   },
   methods:{
+
+    handleThumbnailError(e) {
+      e.target.src = require('@/assets/defaultPage.png');
+    },
 
     handleImageUpload(event) {
       const fileInput = event.target;
@@ -204,7 +210,7 @@ export default {
               <img :src="moment.content.contentDetail.img" alt="">
             </div>
             <div class="user-moments-list-item-moment-video" v-if="moment.type==='0' ">
-              <img :src="moment.content.contentDetail.thumbnail" alt="">
+              <img :src="`${BASE_URL}/viewImage?url=${moment.content.contentDetail.thumbnail}`" alt="" @error="handleThumbnailError">
               <div class="user-moments-list-item-moment-video-detail">
                 <div class="user-moments-list-item-moment-video-detail-title"
                      @click="jumpToVideoDetail(moment.content.contentDetail.id)"

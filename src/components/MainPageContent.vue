@@ -3,12 +3,14 @@
 // import userUtils from "@/utils/userUtils";
 
 import videoApi from "@/api/videoApi";
+import config from "@/config";
 
 export default {
   name: "MainPageContent",
   // mixins:[userUtils],
   data(){
     return{
+      BASE_URL: config.BASE_URL,
       items:[
         {
           imgUrl:require('@/assets/header/header-banner.png'),
@@ -152,52 +154,18 @@ export default {
           href: 'https://www.bilibili.com/anime/'
         }
       ],
-      recommendedVideos:[
-        {
-          id:55,
-          thumbnail:require('@/assets/banner/1.jpg')
-        },
-        {
-          id:55,
-          thumbnail:require('@/assets/banner/2.jpg')
-        },
-        {
-          id:55,
-          thumbnail:require('@/assets/banner/3.jpg')
-        }
-      ],
-      videos:[
-        // {
-        //   id:1,
-        //   title:'title1',
-        //   thumbnail:"",
-        //   createTime: '2023-12-16 10:30:42',
-        //   danmuCount:20,
-        //   viewCount:10
-        // },
-        // {
-        //   id:2,
-        //   title:'title2',
-        //   thumbnail:"",
-        //   createTime: '2023-12-17 10:30:42',
-        //   danmuCount:30,
-        //   viewCount:20
-        // },
-        // {
-        //   id:3,
-        //   title:'title3',
-        //   thumbnail:"",
-        //   createTime: '2023-12-18 10:30:42',
-        //   danmuCount:10,
-        //   viewCount:40
-        // }
-      ],
+      recommendedVideos:[],
+      videos:[],
       infiniteId:1,
       currentPage:1
     }
 
   },
   methods:{
+    handleThumbnailError(e) {
+      e.target.src = require('@/assets/defaultPage.png');
+    },
+
     jumpToVideoDetail(video){
       // console.log(video)
       if(video){
@@ -220,16 +188,18 @@ export default {
       videoApi.pageListVideos({params}).then(response => {
         const {list:videos, total:total} = response.data;
         if(videos.length === 0){
-          // 已加载所有数据，不再触发加载
           $state.complete();
           return;
         }
         this.videos = this.videos.concat(videos);
         this.total = total;
-        this.currentPage++; // 递增当前页码
-        $state.loaded(); // 标记加载完成
+        // 首次加载时用前5个视频作为轮播推荐
+        if(this.currentPage === 1 && this.recommendedVideos.length === 0){
+          this.recommendedVideos = videos.slice(0, 5);
+        }
+        this.currentPage++;
+        $state.loaded();
       }).catch(error => {
-        // 捕获异常
         console.error('请求出错:', error);
         $state.complete();
       });
@@ -311,11 +281,12 @@ export default {
     </div>
 
     <div class="main-page-video-container">
-      <div class="carousel-container">
+      <div class="carousel-container" v-if="recommendedVideos.length > 0">
         <el-carousel :interval="5000" arrow="always" class="carousel">
           <el-carousel-item v-for="(video, index) in recommendedVideos" :key="index">
-            <img :src="video.thumbnail"
+            <img :src="`${BASE_URL}/viewImage?url=${video.thumbnail}`"
                  :alt="video.id" style="width: 100%; height: 100%; border-radius: 5px"
+                 @error="handleThumbnailError"
                   @click="jumpToVideoDetail(video)">
           </el-carousel-item>
         </el-carousel>
@@ -326,9 +297,7 @@ export default {
 <!--        <img :src="video.thumbnail" class="thumbnail" alt="">-->
 <!--        <img v-if="video.thumbnail" :src="video.thumbnail" class="thumbnail" alt="">-->
 
-        <img v-if="video.thumbnail" :src="`http://124.221.69.18:8070/viewImage?url=${video.thumbnail}`" class="thumbnail" alt="">
-
-        <img v-else :src="require('@/assets/defaultPage.png')" class="thumbnail" alt="Default Thumbnail">
+        <img :src="`${BASE_URL}/viewImage?url=${video.thumbnail}`" class="thumbnail" alt="" @error="handleThumbnailError">
 
         <span>{{video.title}}</span>
         <div class="videos-details">

@@ -3,12 +3,14 @@ import userUtils from "@/utils/userUtils";
 import LoginDialog from "@/components/LoginDialog.vue";
 import userMomentApi from "@/api/userMomentApi";
 import userHistoryApi from "@/api/userHistoryApi";
+import config from "@/config";
 
 export default {
   name: "CommonHeader",
   components: {LoginDialog},
   data(){
     return {
+      BASE_URL: config.BASE_URL,
       dialogVisible:false,
       entries:[
         {
@@ -39,6 +41,10 @@ export default {
   },
   mixins:[userUtils],
   methods:{
+    handleThumbnailError(e) {
+      e.target.src = require('@/assets/defaultPage.png');
+    },
+
     jumpWithLoginUser(path){
       //先判断用户是否登录，如果没有登录，弹出用户登录对话框
       if(!this.isUserLoggedIn){
@@ -211,8 +217,8 @@ export default {
                          style="height: 60px; width: 100px; border-radius: 5px; margin-right: 5px">
                   </div>
                   <div class="moment-list-item-video" v-if="moment.type==='0' " style="display: flex">
-                    <img :src="moment.content.contentDetail.thumbnail" alt=""
-                         style="height: 60px; width: 100px; border-radius: 5px; margin-right: 5px">
+                    <img :src="`${BASE_URL}/viewImage?url=${moment.content.contentDetail.thumbnail}`" alt=""
+                         style="height: 60px; width: 100px; border-radius: 5px; margin-right: 5px" @error="handleThumbnailError">
                     <div class="moment-list-item-video-detail" style="display: flex; flex-direction: column; justify-content: space-between">
                       <div class="moment-list-item-video-detail-title">
                         {{moment.content.contentDetail.title}}
@@ -270,8 +276,8 @@ export default {
                    :key="index"
                    style="background-color: #f1f1f1; margin-bottom: 10px; border-radius: 5px; padding: 5px">
                 <div class="history-list-item-video" style="display: flex">
-                  <img :src="history.thumbnail" alt=""
-                       style="height: 60px; width: 100px; border-radius: 5px; margin-right: 5px">
+                  <img :src="`${BASE_URL}/viewImage?url=${history.thumbnail}`" alt=""
+                       style="height: 60px; width: 100px; border-radius: 5px; margin-right: 5px" @error="handleThumbnailError">
                   <div class="history-list-item-video-detail"
                        style="display: flex; flex-direction: column; justify-content: space-between">
                     <div class="history-list-item-video-detail-title">
