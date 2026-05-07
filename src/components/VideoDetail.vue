@@ -166,20 +166,37 @@ export default {
 
     initWebsocket(){
       const url = this.WS_URL + '/imserver/' + localStorage.getItem('token');
-      console.log(url);
+      console.log('[WS] 正在连接:', url);
       this.ws = new WebSocket(url);
-      this.ws.onmessage = (event) =>{
+
+      this.ws.onopen = () => {
+        console.log('[WS] 连接已建立');
+      };
+
+      this.ws.onmessage = (event) => {
+        console.log('[WS] 收到原始消息:', event.data);
         const msgObj = JSON.parse(event.data);
-        console.log('接收到后端的消息：', msgObj);
-        // 如果消息类型是弹幕，则调用播放器发送弹幕
-        if(msgObj.txt){
-          console.log('接收到弹幕：',msgObj);
-          this.player.danmu.sendComment(msgObj);
+        console.log('[WS] 解析后的消息:', msgObj);
+        // 后端返回结构: {content: {start,txt,duration,style}, videoId, danmuTime}
+        // 弹幕数据在 content 字段中
+        if(msgObj.content && msgObj.content.txt){
+          console.log('[WS] 收到弹幕，正在推送到播放器:', msgObj.content);
+          msgObj.content.id = Date.now();
+          this.player.danmu.sendComment(msgObj.content);
         }
         //在线人数通知消息处理
         if(msgObj.onlineCount){
+          console.log('[WS] 在线人数更新:', msgObj.onlineCount);
           this.onWatching = msgObj.onlineCount;
         }
+      };
+
+      this.ws.onclose = (event) => {
+        console.log('[WS] 连接已关闭, code:', event.code, 'reason:', event.reason);
+      };
+
+      this.ws.onerror = (error) => {
+        console.error('[WS] 连接错误:', error);
       };
     },
 
