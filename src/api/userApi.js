@@ -67,8 +67,8 @@ export default {
         return await httpRequest.put('/user-infos',params);
     },
 
-    // //使用elasticsearch分页查询用户列表
-    // async pageListUsersByEs(params) {
-    //     return await httpRequest.get('/search-users', {params});
-    // }
+    //使用elasticsearch分页查询用户列表
+    async pageListUsersByEs(params) {
+        return await httpRequest.get('/search-users', {params});
+    }
 }

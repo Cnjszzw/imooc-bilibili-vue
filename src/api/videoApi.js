@@ -140,10 +140,10 @@ export default {
         return await httpRequest.put('/video-collections', params);
     },
     //
-    // //使用elasticsearch分页查询视频列表
-    // async pageListVideosByEs (params) {
-    //     return await httpRequest.get('/search-videos', {params});
-    // },
+    //使用elasticsearch分页查询视频列表
+    async pageListVideosByEs (params) {
+        return await httpRequest.get('/search-videos', {params});
+    },
     //
     // //获取推荐视频（游客模式）
     // async getVideoRecommendationsForVisitor(){
