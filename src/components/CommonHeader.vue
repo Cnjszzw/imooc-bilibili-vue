@@ -147,7 +147,8 @@ export default {
             <input class="nav-search-input"
                    type="text" autocomplete="off"
                    maxlength="100" placeholder="请输入要搜索的内容"
-                   v-model="searchTxt">
+                   v-model="searchTxt"
+                   @keyup.enter="searchContents">
           </div>
           <div class="nav-search-btn">
             <el-button icon="el-icon-search"

@@ -81,7 +81,7 @@ export default {
       </div>
       <div class="search-contents-users-info">
         <div class="search-contents-users-info-nick">
-          {{ user.nick }}
+          <span v-html="user.nick"></span>
         </div>
         <div class="search-contents-users-info-sign">
           {{ user.sign }}

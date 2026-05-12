@@ -94,7 +94,7 @@ export default {
           <div class="search-contents-videos-info">
             <div class="search-contents-videos-info-title"
                  @click="jumpToVideoDetail(video.id)">
-              <span>{{ video.title }}</span>
+              <span v-html="video.title"></span>
             </div>
             <div class="search-contents-videos-info-count">
               <span>
